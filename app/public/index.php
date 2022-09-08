@@ -9,9 +9,6 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-include __DIR__ . '/../config/config.php';
-include __DIR__ . '/../src/db.php';
-
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/../.env');
 
@@ -24,6 +21,14 @@ $app = AppFactory::create();
 
 include __DIR__ . '/../routes/api.php';
 include __DIR__ . '/../routes/web.php';
+
+$app->addRoutingMiddleware();
+
+$errorSettings = $container->get('Config')->getErrorSettings();
+$errorMiddleware = $app->addErrorMiddleware(
+    $errorSettings['displayErrorDetails'], 
+    $errorSettings['logErrors'], 
+    $errorSettings['logErrorDetails']);
 
 $app->run();
 
