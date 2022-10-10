@@ -4,7 +4,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
-$jsonBodyParserMiddleware = function(Request $request, RequestHandler $handler) {
+$jsonBodyParser = function(Request $request, RequestHandler $handler) {
     $contentType = $request->getHeaderLine('Content-Type');
 
         if (strstr($contentType, 'application/json')) {
@@ -13,6 +13,7 @@ $jsonBodyParserMiddleware = function(Request $request, RequestHandler $handler) 
                 $request = $request->withParsedBody($contents);
             }
         }
+
 
         return $handler->handle($request);
 };
