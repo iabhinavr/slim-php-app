@@ -82,8 +82,8 @@ $app->post('/player/add', function(Request $request, Response $response) {
     $response->getBody()->write(json_encode($results));
     return $response->withHeader('content-type', 'application/json');
 })->add($jsonBodyParser)
-  ->add($apiKeyVerifier)
-  ->add($dataValidator);
+  ->add($dataValidator)
+  ->add($apiKeyVerifier);
 
 /*
 Route to update a player
@@ -112,6 +112,7 @@ $app->put('/player/{id}', function(Request $request, Response $response, array $
     return $response->withHeader('content-type', 'application/json');
     
   })->add($jsonBodyParser)
+    ->add($dataValidator)
     ->add($apiKeyVerifier);
 
 /*
@@ -134,5 +135,5 @@ $app->delete('/player/{id}', function (Request $request, Response $response, arr
         return $response->withHeader('content-type', 'application/json');
 
     })->add($jsonBodyParser)
-        ->add($apiKeyVerifier);
+      ->add($apiKeyVerifier);
 
