@@ -21,14 +21,14 @@ $dataValidator = function(Request $request, RequestHandler $handler) {
 
     $jsonSchemaObject = json_decode($jsonSchema);
 
-    $contentType = $request->getHeaderLine('Content-Type');
+    // $contentType = $request->getHeaderLine('Content-Type');
 
-    if (strstr($contentType, 'application/json')) {
-        $contents = json_decode(file_get_contents('php://input'), true);
-        if (json_last_error() === JSON_ERROR_NONE) {
-            $request = $request->withParsedBody($contents);
-        }
-    }
+    // if (strstr($contentType, 'application/json')) {
+    //     $contents = json_decode(file_get_contents('php://input'), true);
+    //     if (json_last_error() === JSON_ERROR_NONE) {
+    //         $request = $request->withParsedBody($contents);
+    //     }
+    // }
     
     $validator = new Validator();
     $data = $request->getParsedBody();

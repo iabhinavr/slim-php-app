@@ -77,12 +77,11 @@ $app->post('/player/add', function(Request $request, Response $response) {
         ->setParameter(3, $parsedBody['Category'])
     ;
 
-    $results = $queryBuilder->executeQuery();
+    $results = $queryBuilder->executeQuery()->fetchAssociative();
 
     $response->getBody()->write(json_encode($results));
     return $response->withHeader('content-type', 'application/json');
-})->add($jsonBodyParser)
-  ->add($dataValidator)
+})->add($dataValidator)
   ->add($apiKeyVerifier);
 
 /*

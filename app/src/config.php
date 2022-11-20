@@ -16,7 +16,7 @@ class Config {
         ];
 
         $this->errorSettings = [
-                'displayErrorDetails' => true,
+                'displayErrorDetails' => false,
                 'logErrors' => true,
                 'logErrorDetails' => true
         ];

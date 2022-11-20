@@ -19,16 +19,18 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-include __DIR__ . '/../routes/api.php';
-include __DIR__ . '/../routes/web.php';
 
 $app->addRoutingMiddleware();
+$app->addBodyParsingMiddleware();
 
 $errorSettings = $container->get('Config')->getErrorSettings();
 $errorMiddleware = $app->addErrorMiddleware(
     $errorSettings['displayErrorDetails'], 
     $errorSettings['logErrors'], 
     $errorSettings['logErrorDetails']);
+
+include __DIR__ . '/../routes/api.php';
+include __DIR__ . '/../routes/web.php';
 
 $app->run();
 
