@@ -1705,7 +1705,7 @@ abstract class AbstractPlatform
      * @param string             $operator The arithmetic operator (+ or -).
      * @param int|numeric-string $interval The interval that shall be calculated into the date.
      * @param string             $unit     The unit of the interval that shall be calculated into the date.
-     *                                     One of the DATE_INTERVAL_UNIT_* constants.
+     *                                     One of the {@see DateIntervalUnit} constants.
      *
      * @return string
      *
@@ -3499,9 +3499,11 @@ abstract class AbstractPlatform
      *
      * The default conversion tries to convert value into bool "(bool)$item"
      *
-     * @param mixed $item
+     * @param T $item
      *
-     * @return bool|null
+     * @return (T is null ? null : bool)
+     *
+     * @template T
      */
     public function convertFromBoolean($item)
     {
